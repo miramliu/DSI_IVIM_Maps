@@ -26,6 +26,6 @@ The number of basis vectors is set to 300, but the number and range can be adjus
 If python for advanced DWI/IVIM is of interest, please check out https://github.com/darksim33/Pyneapple by J. Jasse and T. Gladytz.
 
 
-Any questions, comments, or concerns can be sent to Mira Liu.
+Any questions, comments, or concerns can be sent to Mira Liu at mirabai.liu@mountsinai.org
 06/12/2024
  
