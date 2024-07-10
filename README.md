@@ -14,7 +14,9 @@ Therefore, if you use any version of this code, please cite "Continuous diffusio
 
 This repository is meant to be a code base, not professional software; it is meant to be forked and edited as needed.
 
-It is set to assume a maximum of three compartments, but this maximum can be adjusted
+It is set to assume a maximum of three spectral diffusion peaks, but this maximum can be adjusted
+
+The peaks are set to be sorted according to proposed kidney diffusion coefficient boundaries. They can be re-sorted as needed after the DSI-IVIM analysis is run.
 
 The b-values must be changed, and number of slices adjusted if converting from dicoms to a stacked matfile for DSI post-processing.
 
