@@ -25,3 +25,15 @@ fD_maps(:,:,1)=Parameter_Volume(:,:,1).*Parameter_Volume(:,:,4)*1.12;
 fD_maps(:,:,2)=Parameter_Volume(:,:,2).*Parameter_Volume(:,:,5)*1.12;
 fD_maps(:,:,3)=Parameter_Volume(:,:,3).*Parameter_Volume(:,:,6)*1.12;
 imagestack(fD_maps)
+
+
+
+%% for resorting into four peaks: 
+load('/Users/miraliu/Desktop/PostDocCode/DSI_IVIM_Maps/Kidney_DSI/Example/IVIM_DSI_slice_6.mat')
+Spectral_Volume = IVIM_DSI.Spectral_Volume;
+Resorted_Parameter_Volume=Resort_Spectral_DSI_Map(Spectral_Volume);
+fD_maps(:,:,1)=Resorted_Parameter_Volume(:,:,1).*Resorted_Parameter_Volume(:,:,5)*1.12;
+fD_maps(:,:,2)=Resorted_Parameter_Volume(:,:,2).*Resorted_Parameter_Volume(:,:,6)*1.12;
+fD_maps(:,:,3)=Resorted_Parameter_Volume(:,:,3).*Resorted_Parameter_Volume(:,:,7)*1.12;
+fD_maps(:,:,4)=Resorted_Parameter_Volume(:,:,4).*Resorted_Parameter_Volume(:,:,8)*1.12;
+imagestack(fD_maps)
