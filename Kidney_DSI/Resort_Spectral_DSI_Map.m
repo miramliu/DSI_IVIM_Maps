@@ -29,7 +29,7 @@ for ii=1:nx
             resultsPeaks(7) = GeoMeanRegionADC_3; %(diff_slow - GeoMeanRegionADC_3./1000)./diff_slow.*100;
             resultsPeaks(8) = GeoMeanRegionADC_4; %(diff_fibro - GeoMeanRegionADC_3./1000)./diff_slow.*100;
             
-            SortedresultsPeaks = ReSort_fourpeaks(resultsPeaks);
+            SortedresultsPeaks = ReSort_fourpeaks_80(resultsPeaks);
 
             Resorted_spectralmap(ii,jj,:) = [SortedresultsPeaks(1),SortedresultsPeaks(2),SortedresultsPeaks(3),SortedresultsPeaks(4),SortedresultsPeaks(5),SortedresultsPeaks(6),SortedresultsPeaks(7), SortedresultsPeaks(8)];
         end

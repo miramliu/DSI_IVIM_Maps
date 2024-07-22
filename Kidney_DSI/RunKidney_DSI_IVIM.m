@@ -11,35 +11,34 @@ function RunKidney_DSI_IVIM(varargin)
         dicomstart = varargin{2};
         dicomend = varargin{3};
         slice = varargin{4};
-        dicompath = fullfile(dicomfolderpath,dicomstart);
     
         % load the stacked dicoms and the allograft mask
         try 
-            loaded = load(fullfile(dicomfolderpath,'StackedDicoms.mat'),'StackedDicoms');
+            loaded = load(fullfile(dicomfolderpath,'StackedDicoms'+ "_slice_" + string(slice) + ".mat"),'StackedDicoms');
             StackedDicoms = loaded.StackedDicoms;
         catch
-            StackedDicoms = MakeStackedDicoms(dicompath, dicomend,slice);
-            save(fullfile(dicomfolderpath,'StackedDicoms.mat'),'StackedDicoms');
+            StackedDicoms = MakeStackedDicoms(dicomfolderpath,dicomstart, dicomend,slice);
+            save(fullfile(dicomfolderpath,'StackedDicoms' + "_slice_" + string(slice) + ".mat"),'StackedDicoms');
     
         end
     
         try 
-            loaded = load(fullfile(dicomfolderpath,'AllograftMask.mat'),'AllograftMask');
+            loaded = load(fullfile(dicomfolderpath,'AllograftMask' + "_slice_" + string(slice) + ".mat"),'AllograftMask');
             AllograftMask = loaded.AllograftMask;
         catch
             disp('ready to draw an ROI?')
             pause()
             figure,imshow(squeeze(StackedDicoms(:,:,1)),[]),truesize([400 400])
             AllograftMask = roipoly;
-            save(fullfile(dicomfolderpath,'AllograftMask.mat'),'AllograftMask');
+            save(fullfile(dicomfolderpath,'AllograftMask' + "_slice_" + string(slice) + ".mat"),'AllograftMask');
             close();
         end
     elseif nargin ==2  %have already generated a dicom stack, load them for processing
         dicomfolderpath = varargin{1};
         slice = varargin{2};
-        loaded = load(fullfile(dicomfolderpath,'AllograftMask.mat'),'AllograftMask');
+        loaded = load(fullfile(dicomfolderpath,'AllograftMask'+ "_slice_" + string(slice) + ".mat"),'AllograftMask');
         AllograftMask = loaded.AllograftMask;
-        loaded = load(fullfile(dicomfolderpath,'StackedDicoms.mat'),'StackedDicoms');
+        loaded = load(fullfile(dicomfolderpath,'StackedDicoms'+ "_slice_" + string(slice) + ".mat"),'StackedDicoms');
         StackedDicoms = loaded.StackedDicoms;
     else
         error('Input dicom folder path, dicom name starter and dicome name end, and slice, or folder to the pre-processed mat files and slice')
@@ -74,12 +73,18 @@ end
 
 
 %% some nested functions
-function StackedDicoms = MakeStackedDicoms(dicompath, dicomend, slice)
+function StackedDicoms = MakeStackedDicoms(dicomfolderpath, dicomstart, dicomend, slice)
+    dicompath = fullfile(dicomfolderpath,dicomstart);
+
     %% Stack dicoms
     check = dicomread(strcat(dicompath,'0001', dicomend));
     [nx,ny] = size(check);
+
+    % get number of slices
+    filenames = dir(fullfile(dicomfolderpath,'*.dcm'));
+    total_Im = numel(filenames);
     
-    slices_number = 10; %often 16. can automate this at some point to just check the total number of dicoms and divide by number of b values... 07/05/2024
+    slices_number = total_Im/9; %often 16. can automate this at some point to just check the total number of dicoms and divide by number of b values... 07/05/2024
     StackedDicoms = zeros(nx,ny,9); %stacked dicoms nx, ny, by b-values
     for j = 0:8 %for 9 b values
         k = slice+(j*slices_number); %(get each of the 7 slices for all 9 b-values
