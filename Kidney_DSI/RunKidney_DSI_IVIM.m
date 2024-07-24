@@ -62,7 +62,7 @@ function RunKidney_DSI_IVIM(varargin)
     IVIM_DSI.Spectral_Volume      = spectral_map; %% file size too large... can only save peaks themselves for one slice at a time. Matlab limitation?
     
 
-    SaveDIR = fullfile(dicomfolderpath, "IVIM_DSI" + "_slice_" + string(slice) + ".mat");
+    SaveDIR = fullfile(dicomfolderpath, "IVIM_DSI" + "_slice_" + string(slice) + "simpleNNLS.mat");
     save (SaveDIR, 'IVIM_DSI');
     disp(['saved.... ' SaveDIR])
 
