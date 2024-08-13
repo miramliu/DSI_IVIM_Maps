@@ -8,7 +8,7 @@ It takes a stack of dicoms off the scanner, sorts them by b-value trace, fits th
 See "ExampleRun.m" for how to run the code.
 
 # Code Base
-This code was adapted from [open source code](https://github.com/JoaoPeriquito/NNLS_computation_of_renal_DWI) by Mira Liu to create spectral maps with an image viewer that shows the spectrum per voxel. It also will sort parameters based on signal fraction and diffusion, and creates multi-compartment flow maps.
+This code was adapted by Mira M. Liu from a simulation with [open source code](https://github.com/JoaoPeriquito/NNLS_computation_of_renal_DWI) to create spectral maps with an image viewer that shows the spectrum per voxel. It also will sort parameters based on signal fraction and diffusion, and creates multi-compartment flow maps.
 
 The individual nonnegative least squares fit of each signal decay is based off of an original multi-exponential fitting model from Thorarin Bjarnason and Ross Mitchell (2010). Therefore, if you use any version of this code, please cite "Continuous diffusion spectrum computation for diffusion-weighted magnetic resonance imaging of the kidney tubule system" by J. Periquito & T. Gladytz et al., https://doi.org/10.21037/qims-20-1360, "AnalyzeNNLS: Magnetic resonance multiexponential decay image analysis" by T.A. Bjarnason & J.R. Mitchel at https://doi.org/10.1016/j.jmr.2010.07.008, as well as "Quantification of multi-compartment flow from spectral diffusion of IVIM (DSI-IVIM)" by M.M. Liu et al., doi.org/TBD.
 
@@ -30,5 +30,5 @@ If python for advanced DWI/IVIM is of interest, please check out https://github.
 
 
 Any questions, comments, or concerns can be sent to Mira Liu at mirabai.liu@mountsinai.org
-06/12/2024
+08/12/2024
  
