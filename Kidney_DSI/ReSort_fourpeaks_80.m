@@ -6,7 +6,7 @@
 % important changes from ReSort_fourpeaks_orig: 'expected' diffusion is 1.8 now as opposed to 1.5, 
 % and threshold for blood is now 100 as opposed to 10. and now peak size is considered. 
 % assumes fibrosis < .8, tissue is > .8, < 5, tubule is > 2, < 100, blood is > 100 
-function SortedresultsPeaks = ReSort_fourpeaks_100(resultsPeaks)
+function SortedresultsPeaks = ReSort_fourpeaks_80(resultsPeaks)
 
     %% for note... 
     %disp('------------------------------------------------------------------------- ')
@@ -463,7 +463,7 @@ function SortedresultsPeaks = ReSort_fourpeaks_100(resultsPeaks)
                             SortingDone = 1; %sorting is done
                         else %if middle is smaller... but two peaks les than tissue, merge into one fibrosis peak
                             f_fibro = CompartmentFractions(other1_idx) + CompartmentFractions(other2_idx);
-                            weightedDiffs = CompartmentFractions(other1_idx)*CompartmentDiffusion(other1_idx) + CompartmentFractions(other2_idx)*CompartmentDiffusion(other2_idx);
+                            weightedDiffs = CompartmentFractions(other1_idx)*CompartmentDiffusions(other1_idx) + CompartmentFractions(other2_idx)*CompartmentDiffusions(other2_idx);
                             D_fibro = weightedDiffs/(CompartmentFractions(other1_idx) + CompartmentFractions(other2_idx));
                             % make it a 2 peak spectrum
                             SortedresultsPeaks = [0, 0, f_tissue, f_fibro, 0, 0, D_tissue, D_fibro];

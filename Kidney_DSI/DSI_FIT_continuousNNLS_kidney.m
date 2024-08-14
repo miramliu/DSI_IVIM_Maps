@@ -37,11 +37,11 @@ function [parameter_map, spectralmap] = DSI_FIT_continuousNNLS_kidney(b_values, 
 
                
                 %% try to fit them with NNLS
-                %[TempAmplitudes, TempResnorm, TempResid ] = CVNNLS(A, SignalInput);
+                [TempAmplitudes, TempResnorm, TempResid ] = CVNNLS(A, SignalInput);
 
                 %% fitting with simple NNLS, with an assumed constant regularization paramater of lambda = #b-value/SNR = 0.1
-                lambda = 2; %
-                [TempAmplitudes, TempResnorm, TempResid ] = simpleCVNNLS_curveregularized(A, SignalInput, lambda); %this now also still has the ends regularized
+                %lambda = 2; %
+                %[TempAmplitudes, TempResnorm, TempResid ] = simpleCVNNLS_curveregularized(A, SignalInput, lambda); %this now also still has the ends regularized
 
                 amplitudes(:) = TempAmplitudes';
                 resnorm(:) = TempResnorm';
