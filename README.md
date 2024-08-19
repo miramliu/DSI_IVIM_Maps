@@ -4,6 +4,7 @@
 Code written in Matlab 2023a by Mira M. Liu for processing diffusion spectrum of multi b-value DWI for multi-compartment imaging. 
 It takes a stack of dicoms off the scanner, sorts them by b-value trace, fits them to a continuous diffusion spectrum, and outputs maps and spectra on a voxel-by-voxel basis as matfiles.
 
+This is still in progress, please reach out to Mira at mirabai.liu@mountsinai.org if you are interested in using the code. - August 19 2024
 
 See "ExampleRun.m" for how to run the code.
 
