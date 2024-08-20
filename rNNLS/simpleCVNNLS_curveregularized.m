@@ -82,8 +82,11 @@ I = eye(length(Decay));
 %Curvature
 T2length = length( A(1,:) );
 
+%% makes curve end at the edges
 H = -2*eye(T2length,T2length) + diag(ones(T2length-1,1),1)+ ...
     diag(ones(T2length-1,1),-1);   %Curvature
+
+%% no curve forced to end at the edges
 %{
 H = eye(T2length,T2length) - diag(ones(T2length-1,1),1)./2 - diag(ones(T2length-1,1),-1)./2;
 

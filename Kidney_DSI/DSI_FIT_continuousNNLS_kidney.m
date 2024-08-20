@@ -1,4 +1,4 @@
-function [parameter_map, spectralmap] = DSI_FIT_continuousNNLS_kidney(b_values, ImageStack)
+function [parameter_map, spectralmap] = DSI_FIT_continuousNNLS_kidney(b_values, ImageStack, lambda)
 %------------------------------------------------------%
 % Fit S(b)/So=CBV*exp(-bD*)+(1-CBV)*exp(-bD)           %
 %------------------------------------------------------%
@@ -37,12 +37,16 @@ function [parameter_map, spectralmap] = DSI_FIT_continuousNNLS_kidney(b_values, 
 
                
                 %% try to fit them with NNLS
-                [TempAmplitudes, TempResnorm, TempResid ] = CVNNLS(A, SignalInput);
+                if strcmp(lambda, 'cv')
+                    [TempAmplitudes, TempResnorm, TempResid ] = CVNNLS(A, SignalInput);
+                else
 
                 %% fitting with simple NNLS, with an assumed constant regularization paramater of lambda = #b-value/SNR = 0.1
-                %lambda = 2; %
-                %[TempAmplitudes, TempResnorm, TempResid ] = simpleCVNNLS_curveregularized(A, SignalInput, lambda); %this now also still has the ends regularized
+                %lambda = 6; %
+                    [TempAmplitudes, TempResnorm, TempResid ] = simpleCVNNLS_curveregularized(A, SignalInput, lambda); %this now also still has the ends regularized
+                end
 
+                
                 amplitudes(:) = TempAmplitudes';
                 resnorm(:) = TempResnorm';
                 resid(1:length(TempResid)) = TempResid';

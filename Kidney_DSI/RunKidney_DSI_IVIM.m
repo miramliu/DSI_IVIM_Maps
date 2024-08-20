@@ -11,6 +11,12 @@ function RunKidney_DSI_IVIM(varargin)
         dicomstart = varargin{2};
         dicomend = varargin{3};
         slice = varargin{4};
+
+        if nargin == 5
+            lambda = varargin{5};
+        else
+            lambda = 'cv';
+        end
     
         % load the stacked dicoms and the allograft mask
         try 
@@ -54,7 +60,7 @@ function RunKidney_DSI_IVIM(varargin)
 
     AllograftMaskedDicoms = permute(AllograftMaskedDicoms, [3,1,2]); %to have it bval, nx, ny
 
-    [parameter_map, spectral_map] =  DSI_FIT_continuousNNLS_kidney(Bvalues,AllograftMaskedDicoms);
+    [parameter_map, spectral_map] =  DSI_FIT_continuousNNLS_kidney(Bvalues,AllograftMaskedDicoms,lambda);
 
 
 
